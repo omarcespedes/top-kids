@@ -1,0 +1,16 @@
+.login-container{
+    width: 400px;
+    mat-form-field{
+      display: block;
+      width: 100%;
+    }
+}
+
+.error-message {
+  border: 1px solid red;
+  color: red;
+  width: 370px;
+  padding: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}

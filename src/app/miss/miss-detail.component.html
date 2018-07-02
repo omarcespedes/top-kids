@@ -1,0 +1,51 @@
+<div>
+    <div class="form-section" style="margin-bottom: 180px;">
+        <h2>Miss</h2>
+        <form (ngSubmit)="onSubmitMiss()" fxLayout="column" class="inner-section" #missForm="ngForm" fxLayoutAlign="center start">
+            <mat-form-field>
+                <input matInput placeholder="Nombre" [(ngModel)]="miss.name" name="name" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Apellido Paterno" [(ngModel)]="miss.lastName" name="lastName" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Apellido Materno" [(ngModel)]="miss.surName" name="surName">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [matDatepicker]="bornDate" placeholder="Fecha de Nacimiento" [(ngModel)]="miss.birthDate" [max]="maxDate" name="birthDate" required>
+                <mat-datepicker-toggle matSuffix [for]="bornDate"></mat-datepicker-toggle>
+                <mat-datepicker #bornDate></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Celular" [(ngModel)]="miss.cellphone" name="cellphone" type="number">
+            </mat-form-field>
+            <mat-form-field *ngIf="userService.isAdmin()" >
+                <input matInput placeholder="Salario" [(ngModel)]="miss.salary" name="salary" type="number" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Email" [(ngModel)]="miss.email" name="email" email required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="CI" [(ngModel)]="miss.ci" name="ci" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [matDatepicker]="startDate" placeholder="Fecha de inicio" [(ngModel)]="miss.startDate" name="startDate" [max]="maxDate" required>
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate></mat-datepicker>
+            </mat-form-field>
+            <mat-datepicker #startDate></mat-datepicker>
+            <mat-form-field>
+                <input matInput [matDatepicker]="bonusDate" placeholder="Fecha pago aguinaldo" [(ngModel)]="miss.bonusPayDate" name="bonusPayDate">
+                <mat-datepicker-toggle matSuffix [for]="bonusDate"></mat-datepicker-toggle>
+                <mat-datepicker #bonusDate></mat-datepicker>
+            </mat-form-field>
+            <mat-datepicker #bonusDate></mat-datepicker>
+            <mat-form-field>
+              <mat-select placeholder="Curso" [(ngModel)]="miss.groupId" name="group">
+                  <mat-option *ngFor="let group of groups" [value]="group.id">{{group.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button type="submit" mat-raised-button [disabled]="!missForm.valid" color="primary" style="margin-top: 20px">Guardar</button>
+        </form>
+    </div>
+</div>

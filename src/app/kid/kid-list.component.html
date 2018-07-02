@@ -1,0 +1,27 @@
+<div class="list-section">
+    <div class="header" fxLayout="row" fxLayoutAlign="start center">
+       <span class="title">Niños</span>
+       <span fxFlex></span>
+       <mat-checkbox class="include-inactive" color="primary" (change)="onInactiveChange($event)" [(ngModel)]="includeInactive">Incluir Inactivos</mat-checkbox>
+       <button mat-raised-button (click)="routeToNewKid()">Nuevo niño</button>
+    </div>
+    <div class="list-content">
+        <mat-list>
+            <mat-list-item *ngFor="let kid of kidList" style="margin: 10px 0;">
+                <img class="avatar" matListAvatar [src]="getProfilePicture(kid)" alt="..">
+                <h3 class="info-text" matLine> {{kid.name}} {{kid.lastName}} {{kid.surName}}
+                    <span class="action-buttons">
+                        <mat-icon (click)="onEditKid(kid)">mode_edit</mat-icon>
+                        <mat-icon (click)="onPayKid(kid)">attach_money</mat-icon>
+                        <mat-icon (click)="onDeleteKid(kid)">delete</mat-icon>
+                    </span>
+                </h3>
+                <div class="birth-date" matLine>
+                    <span>Fecha Nacimiento: </span>
+                    <span>{{kid.birthDate | date: 'dd/MM/yyyy'}} </span>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+</div>

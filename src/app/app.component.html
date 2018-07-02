@@ -1,0 +1,19 @@
+<div fxFill class="main-wrapper">
+  <mat-sidenav-container class="side-nav-container">
+    <mat-sidenav fxFlex="20" #sidenav [opened]="showSideNav" mode="side" class="side-nav">
+      <div class="logo-container">
+        <span class="logo"></span> 
+        <span class="logo-label">Top Kids</span>
+      </div>
+      <div (click)="onSectionSelected(section)" class="section" *ngFor="let section of navSections" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon class="side-icon">{{section.icon}}</mat-icon> <span class="section-name">{{section.name}}</span>
+      </div>
+    </mat-sidenav>
+    <div fxFlex fxFill fxLayout="column" class="content-container">
+      <div fxFlex class="main-content">
+        <router-outlet></router-outlet>
+      </div>
+      <footer></footer>
+    </div>
+  </mat-sidenav-container>
+</div>

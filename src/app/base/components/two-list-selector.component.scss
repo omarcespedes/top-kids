@@ -1,0 +1,28 @@
+.two-list-selector{
+    padding: 15px 0;
+    .list-selector{
+        min-width: 350px;
+        padding: 10px;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        height: 300px;
+        overflow: auto;
+        .list-item{
+            padding: 10px;
+            &.selected{
+                border: 1px solid dodgerblue;
+            }
+        }
+    }
+
+    .buttons{
+        margin: 0 15px;
+        button{
+            width: 30px;
+            height: 30px;
+            background: none;
+            box-shadow: none;
+            border: 1px solid #ccc;
+        }
+    }
+}

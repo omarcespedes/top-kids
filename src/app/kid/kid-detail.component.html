@@ -1,0 +1,113 @@
+<div>
+    <form (ngSubmit)="onSubmitKid()" #kidForm="ngForm">
+        <div class="form-section">
+            <h2>Niño</h2>
+        <div fxLayout="row">
+            <div fxFlex fxLayout="column" class="inner-section">
+                <mat-form-field>
+                    <input matInput placeholder="Nombre" [(ngModel)]="kid.name" name="name" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Apellido Paterno" [(ngModel)]="kid.lastName" name="lastName" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Apellido Materno" [(ngModel)]="kid.surName" name="surName">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="bornDate" placeholder="Fecha de Nacimiento" [(ngModel)]="kid.birthDate" name="birthDate" [max]="maxDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="bornDate"></mat-datepicker-toggle>
+                    <mat-datepicker #bornDate></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Direccion" [(ngModel)]="kid.address" name="address">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Alergias" [(ngModel)]="kid.allergies" name="allergies">
+                </mat-form-field>
+            </div>
+            <div fxFlex fxLayout="column" class="inner-section">
+                <mat-form-field>
+                    <input matInput placeholder="Hermanos" [(ngModel)]="kid.siblings" name="siblings">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="startDate" placeholder="Fecha de inicio" [(ngModel)]="kid.startDate" name="startDate">
+                    <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                    <mat-datepicker #startDate></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Nombre factura" [(ngModel)]="kid.invoiceName" name="invoiceName">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="NIT Factura" [(ngModel)]="kid.invoiceNIT" name="invoiceNIT">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Pago Mensual" [(ngModel)]="kid.monthlyPayment" name="monthlyPayment" type="number">
+                </mat-form-field>
+                <mat-checkbox name="active" [(ngModel)]="kid.active" color="primary">Activo</mat-checkbox>
+                <input type="file" name="avatar" #kidPhoto>
+            </div>
+        </div>
+        </div>
+        <div class="form-section">
+            <h2>Padres</h2>
+            <div fxLayout="row">
+                <div *ngFor="let parent of kid.parents; let i = index;">
+                    <form fxLayout="column" class="inner-section" #parentForm="ngForm">
+                        <mat-form-field>
+                            <input matInput placeholder="Nombre" [(ngModel)]="parent.name" name="name" required>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Apellido Paterno" [(ngModel)]="parent.lastName" name="lastName" required>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Apellido Materno" [(ngModel)]="parent.surName" name="surName">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="parentBornDate" placeholder="Fecha Nacimiento" [(ngModel)]="parent.birthDate" name="birthDate" [max]="maxDate" required>
+                            <mat-datepicker-toggle matSuffix [for]="parentBornDate"></mat-datepicker-toggle>
+                            <mat-datepicker #parentBornDate></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Profesion" [(ngModel)]="parent.employment" name="employment">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Celular Trabajo" [(ngModel)]="parent.workPhone" name="workPhone">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Celular" [(ngModel)]="parent.cellPhone" name="cellPhone" type="number">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Email" [(ngModel)]="parent.email" name="email" email>
+                        </mat-form-field>
+                        <mat-radio-group [(ngModel)]="parent.type" name="type_{{i}}" fxLayout="column" required>
+                            <mat-radio-button [value]="'father'">Papa</mat-radio-button>
+                            <mat-radio-button [value]="'mother'">Mama</mat-radio-button>
+                        </mat-radio-group>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="form-section">
+            <div fxLayout="row">
+                <h2>Contactos</h2>
+                <span fxFlex></span>
+                <button type="button" mat-raised-button (click)="addContact()">Nuevo Contacto</button>
+            </div>
+            <div fxLayout="column" class="inner-section">
+                <div *ngFor="let contact of kid.kidContacts; let i = index;">
+                    <mat-form-field>
+                        <input matInput placeholder="Nombre" [(ngModel)]="contact.name" name="name_{{i}}">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Telefono" [(ngModel)]="contact.phone" name="phone_{{i}}">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Relacion/Parentesco" [(ngModel)]="contact.relationship" name="relationship_{{i}}">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" mat-raised-button [disabled]="!kidForm.valid" color="primary">Guardar</button>
+    </form>
+</div>

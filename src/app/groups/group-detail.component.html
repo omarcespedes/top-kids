@@ -1,0 +1,12 @@
+<div class="form-section">
+    <h2>Crear nuevo curso</h2>
+    <form (ngSubmit)="onSubmitGroup()" fxLayout="column" #groupForm="ngForm" fxLayoutAlign="center start">
+        <mat-form-field>
+            <input matInput type="text" placeholder="Nombre" name="name" [(ngModel)]="group.name" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" placeholder="Description" name="description" [(ngModel)]="group.description" required>
+        </mat-form-field>
+        <button mat-raised-button [disabled]="!groupForm.valid" color="primary">Guardar</button>
+    </form>
+</div>

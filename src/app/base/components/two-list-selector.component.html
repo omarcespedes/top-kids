@@ -1,0 +1,24 @@
+<div fxLayout="row" class="two-list-selector">
+    <div>
+        <div>Disponibles</div>
+        <div class="list-selector" #source>
+            <div [ngClass]="{selected: sourceItem.selected }" (click)="onItemClick(sourceItem)" class="list-item" *ngFor="let sourceItem of sourceList">
+                {{sourceItem.displayValue}}
+            </div>
+        </div>
+    </div>
+    
+    <div fxLayout="column" fxLayoutAlign="center center" class="buttons" #buttons>
+        <button (click)="onMoveItems(true)" > > </button>
+        <button (click)="onMoveItems(false)"> < </button>
+    </div>
+
+    <div>
+        <div>Seleccionados</div>
+        <div class="list-selector" #target>
+            <div [ngClass]="{selected: targetItem.selected }" (click)="onItemClick(targetItem)" class="list-item" *ngFor="let targetItem of targetList">
+                {{targetItem.displayValue}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="form-section">
+  <h2>Configuracion</h2>
+  <form (ngSubmit)="onSaveConfiguration()" fxLayout="column" fxLayoutAlign="start start">
+    <mat-form-field>
+        <input matInput [(ngModel)]="configuration.minNationalSalary"
+        type="number" required placeholder="Salario Minimo" name="minSal">
+    </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="configuration.previousMinNationalSalary"
+        type="number" required placeholder="Salario Minimo Anterior" name="previousMinSal">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="configuration.salaryIncreasePercentage"
+        type="number" required placeholder="Incremento Salarial" name="increaseSal">
+    </mat-form-field>
+    <div>
+      <button mat-raised-button color="primary">Guardar</button>
+      <span class="success-message" *ngIf="showMessage">Guardado Correctamente</span>
+    </div>
+  </form>
+</div>

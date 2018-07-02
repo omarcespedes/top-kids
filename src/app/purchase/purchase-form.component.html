@@ -1,0 +1,77 @@
+<div>
+    <div class="form-section">
+        <h2>Compras {{typeName}}</h2>
+        <form (submit)="onSubmitPurchase()" #purchaseForm="ngForm">
+            <mat-form-field>
+                <input matInput placeholder="Item" required [matAutocomplete]="auto" [formControl]="itemNameCtrl">
+            </mat-form-field>
+
+            <mat-autocomplete #auto="matAutocomplete" [(ngModel)]="purchase.itemName" name="itemName" ngDefaultControl>
+                <mat-option *ngFor="let name of filteredNames | async" [value]="name">
+                    {{ name }}
+                </mat-option>
+            </mat-autocomplete>
+
+            <mat-form-field>
+                <input matInput placeholder="Cantidad" [(ngModel)]="purchase.quantity" name="quantity" required type="number">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Precio Unitario (Bs)" [(ngModel)]="purchase.unitPrice" name="unitPrice" type="number">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [matDatepicker]="purchaseDate" placeholder="Fecha de compra" [(ngModel)]="purchase.purchaseDate" name="purchaseDate" [max]="maxDate" required>
+                <mat-datepicker-toggle matSuffix [for]="purchaseDate"></mat-datepicker-toggle>
+                <mat-datepicker #purchaseDate></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Lugar de compra" [(ngModel)]="purchase.place" name="place">
+            </mat-form-field>
+            <button mat-raised-button [disabled]="!purchaseForm.valid" color="primary">Guardar</button>
+        </form>
+    </div>
+
+    <div class="form-section">
+        <h2>Compras del mes de {{typeName}}</h2>
+        <form (submit)="onFilterPurchases()">
+          <mat-form-field>
+            <mat-select placeholder="Mes" [(ngModel)]="filter.month" name="month">
+                <mat-option *ngFor="let month of months" [value]="month.value">{{month.label}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Año" [(ngModel)]="filter.year" name="year">
+                <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+            <button mat-raised-button color="primary">Buscar</button>
+        </form>
+        <table class="material-table">
+            <thead>
+                <th>Item</th>
+                <th>Fecha de compra</th>
+                <th>Cantidad</th>
+                <th>Lugar de compra</th>
+                <th>Precio Unitario (Bs)</th>
+                <th>Total  (Bs)</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let purchase of purchases">
+                    <td>{{purchase.itemName}}</td>
+                    <td>{{purchase.purchaseDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{purchase.quantity}}</td>
+                    <td>{{purchase.place}}</td>
+                    <td>{{purchase.unitPrice}}</td>
+                    <td>{{purchase.quantity * purchase.unitPrice}}</td>
+                    <td>
+                        <button (click)="onRemovePurchase(purchase)">X</button>
+                    </td>
+                </tr>
+                <tr class="total">
+                    <td colspan="5" class="label">Total gastos del mes</td>
+                    <td class="amount">{{totalCost}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

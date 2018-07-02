@@ -1,0 +1,15 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <h2>Top Kids</h2>
+    <div *ngIf="error" class="error-message">
+        {{error}}
+    </div>
+    <form fxLayout="column" class="login-container" (ngSubmit)="onLoginSubmit()">
+        <mat-form-field>
+            <input matInput [(ngModel)]="login.username" name="username" required placeholder="Usuario">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput [(ngModel)]="login.password" name="password" type="password" required placeholder="Contraseña">
+        </mat-form-field>
+        <button mat-raised-button color="primary">Login</button>
+    </form>
+</div>

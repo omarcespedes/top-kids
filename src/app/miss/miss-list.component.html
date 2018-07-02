@@ -1,0 +1,23 @@
+<div class="list-section">
+    <div class="header" fxLayout="row">
+        <span class="title">Miss</span>
+        <span fxFlex></span>
+        <button mat-raised-button *ngIf="userService.isAdmin()" color="primary" (click)="routeToMissPayment()">Pago Misses</button>
+        <button mat-raised-button (click)="routeToNewMiss()">Nueva Miss</button>
+    </div>
+    <div class="list-content">
+        <mat-list>
+            <mat-list-item *ngFor="let miss of misses">
+                <h3 matLine> {{miss.name}} {{miss.lastName}} {{miss.surName}}
+                    <span class="action-buttons">
+                        <mat-icon (click)="onEditMiss(miss)">mode_edit</mat-icon>
+                        <mat-icon (click)="onDeleteMiss(miss)">delete</mat-icon>
+                    </span>
+                </h3>
+                <p matLine *ngIf="miss.cellphone">
+                    <span>Celular: {{miss.cellphone}} </span>
+                </p>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>

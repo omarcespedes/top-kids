@@ -1,0 +1,19 @@
+.payment-cell{
+    font-size: 14px;
+    .payment-label{
+        font-weight: 700;
+        padding: 3px 0;
+    }
+    &-inner-wrapper{
+        padding: 2px 1px;
+    }
+}
+
+.row-section > *{
+    margin: 0 15px;
+}
+
+.paid{
+    background-color: green;
+    font-weight: 700;
+}

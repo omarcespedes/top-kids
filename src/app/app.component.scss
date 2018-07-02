@@ -1,0 +1,70 @@
+$FontColorSideNav : #a0a7b1;
+$sectionColor: #354052;
+
+html, body, top-kids, mat-sidenav-container{
+    min-height: 100%;
+    height: 100%;
+}
+
+body{
+    margin: 0;
+    font-family: "Roboto-Regular"
+}
+
+.side-nav-container{
+    .side-nav{
+        background-color: $sectionColor;
+        .logo-container{
+            background-color: #2b3544;
+            padding: 8px;
+            .logo{
+                height: 50px;
+                width: 50px;    
+                display: inline-block;
+                background-image: url("../images/top_kids_logo.png");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+
+            .logo-label{
+                margin: auto 0;
+                color: $FontColorSideNav;
+            }
+        }
+
+        .section{
+            cursor: pointer;
+            min-width: 190px;
+            background-color: $sectionColor;
+            padding: 20px;
+            .section-name{
+                color: $FontColorSideNav;
+                margin-left: 15px;
+            }
+            .side-icon{
+                color: $FontColorSideNav;
+            }
+        }
+    }
+}
+
+//for main layout
+.mat-sidenav-content{
+    width: 100%;
+}
+.mat-sidenav-side{
+    min-width: 190px !important;
+}
+.main-content{
+    padding: 10px;
+}
+
+
+//for tabs
+.mat-tab-body{
+    padding: 5px;
+}
+
+.error-snack{
+    color: red;
+}

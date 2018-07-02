@@ -1,0 +1,37 @@
+<div>
+  <h2>Pago planilla actual</h2>
+  <div>
+    <mat-form-field>
+        <input [(ngModel)]="configuration.minNationalSalary" matInput placeholder="Salario Minimo (Bs)">
+    </mat-form-field>
+    <mat-form-field>
+        <input [(ngModel)]="configuration.salaryIncreasePercentage" matInput placeholder="Incremento Salarial (%)">
+    </mat-form-field>
+    <label>
+      Incremento Salarial Descontado (12.74%):
+      {{0.8726 *configuration.minNationalSalary * configuration.salaryIncreasePercentage / 100 | number : '1.2-2'}}
+      Bs.
+      </label>
+  </div>
+  <table class="material-table">
+    <thead>
+      <th>Miss</th>
+      <th>Salario Neto</th>
+      <th>Planilla (Bs)</th>
+      <th>Bono Antiguedad</th>
+      <th>Pago Mensual</th>
+      <th>Pago Neto</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let miss of misses">
+        <td>{{miss.name}}</td>
+        <td>{{miss.salary}}</td>
+        <td>{{miss.salary * 0.8726 | number: '1.1-2'}}</td>
+        <td>{{calculateOldBond(miss) * 0.8726 | number: '1.2-2'}}</td>
+        <td>{{miss.salary * 0.8726 + (0.8726 * configuration.minNationalSalary * configuration.salaryIncreasePercentage / 100) + calculateOldBond(miss) * 0.8726 | number : '1.2-2'}}</td>
+        <td>{{miss.salary + (configuration.minNationalSalary * configuration.salaryIncreasePercentage / 100) + calculateOldBond(miss) | number : '1.2-2'}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button style="margin-top: 20px" mat-raised-button color="primary" (click)="updatePaymentValues()">Actualizar valores</button>
+</div>

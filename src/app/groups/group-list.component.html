@@ -1,0 +1,27 @@
+<div class="list-section">
+    <div class="header" fxLayout="row">
+        <span class="title">Cursos</span>
+        <span fxFlex></span>
+        <button mat-raised-button (click)="routeToNewGroup()">Nuevo Curso</button>
+    </div>
+    <div class="list-content">
+        <mat-tab-group (selectChange)="onTabChange($event)">
+            <mat-tab *ngFor="let group of groups" label="{{group.name}}">
+                <div>
+                    <p>
+                        <span class="group-label">Descripcion:</span>
+                        <span>{{group.description}}</span>
+                    </p>
+                    <p *ngIf="group.miss">
+                        <span class="group-label">Miss a cargo:</span>
+                        <span>{{group.miss.name}}</span>
+                        <span>{{group.miss.lastName}}</span>
+                        <span>{{group.miss.surName}}</span>
+                    </p>
+                </div>
+                <two-list-selector [sourceList]="availableKids" [targetList]="group.kids" [name]="group.name"></two-list-selector>
+                <button (click)="updateGroup(group)" mat-raised-button color="primary">Guardar</button>
+            </mat-tab>
+        </mat-tab-group>
+    </div>    
+</div>

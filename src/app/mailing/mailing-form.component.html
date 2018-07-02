@@ -1,0 +1,41 @@
+<div>
+    <form (submit)="onSubmitEmails()" #mailForm="ngForm">
+        <div class="form-section">
+            <h2>Filtros</h2>
+            <div class="field-row">
+              <mat-form-field>
+                <mat-select placeholder="Audiencia" [(ngModel)]="filter.audience" (ngModelChange)="onAudienceChange($event)" name="audience" required>
+                    <mat-option [value]="'all'">Todos</mat-option>
+                    <mat-option [value]="'group'">Curso</mat-option>
+                    <mat-option [value]="'kid'">Niño</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field *ngIf="filter.audience==='group'">
+                <mat-select placeholder="Curso" [(ngModel)]="filter.group" name="group" required>
+                    <mat-option *ngFor="let group of groups" [value]="group.id">{{group.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field *ngIf="filter.audience==='kid'">
+                <mat-select placeholder="Niños" [(ngModel)]="filter.kid" name="kid" required>
+                    <mat-option *ngFor="let kid of kids" [value]="kid.id">{{kid.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <mat-form-field>
+              <mat-select placeholder="Papas" [(ngModel)]="filter.parents" name="parents" required>
+                  <mat-option [value]="'all'">Todos</mat-option>
+                  <mat-option [value]="'mother'">Mamas</mat-option>
+                  <mat-option [value]="'father'">Papas</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-section">
+            <h2>Contenido</h2>
+            <mat-form-field>
+                <input matInput placeholder="Asunto" name="subject" [(ngModel)]="subject" required>
+            </mat-form-field>
+            <tiny-editor elementId="mailContent"></tiny-editor>
+            <button mat-raised-button class="send-button" [disabled]="!enableSend || !mailForm.valid" color="primary">Enviar</button>
+        </div>
+    </form>
+</div>

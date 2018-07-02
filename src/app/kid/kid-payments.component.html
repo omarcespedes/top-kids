@@ -1,0 +1,71 @@
+<div>
+    <div class="form-section">
+        <h2>{{kid.name}} {{kid.lastName}} {{kid.surName}}</h2>
+        <form (submit)="onSubmitPayment()" fxLayout="column" #paymentForm="ngForm">
+            <div fxLayout="row" class="row-section">
+              <mat-form-field>
+                <mat-select placeholder="Mes" [(ngModel)]="kidPayment.month" name="month" required>
+                    <mat-option *ngFor="let month of months" [value]="month.value">{{month.label}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select placeholder="Año" [(ngModel)]="kidPayment.year" name="year" required>
+                    <mat-option *ngFor="let year of years" [value]="year.year">{{year.year}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+                <mat-radio-group fxLayout="column" [(ngModel)]="kidPayment.type" name="type" required>
+                    <mat-radio-button value="month">Mensualidad</mat-radio-button>
+                    <mat-radio-button value="material">Cuota de Material</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="row-section">
+                <mat-form-field>
+                    <input matInput placeholder="Monto" type="number" [(ngModel)]="kidPayment.amount" name="amount" required>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-raised-button [disabled]="!paymentForm.valid" color="primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+    <div class="form-section">
+        <h2>Pagos realizados</h2>
+        <div *ngFor="let paymentYear of kidPayments">
+            <h3>{{paymentYear.year}}</h3>
+            <table  class="material-table">
+                <thead>
+                    <th>Material</th>
+                    <th *ngFor="let month of months">{{month.label}}</th>                    
+                </thead>
+                <tbody>
+                    <tr>
+                        <td [ngClass]="{paid: paymentYear.material}">
+                            <span *ngIf="paymentYear.material">Pagado</span>
+                        </td>
+                        <td *ngFor="let monthlyPayment of paymentYear.months" class="payment-cell">
+                            <div *ngFor="let payment of monthlyPayment.payments">
+                                <div class="payment-cell-inner-wrapper">
+                                    <div *ngIf="payment.paymentDate">
+                                        <label class="payment-label">El:</label>
+                                        <label>{{payment.paymentDate | date: 'dd/MM/yyyy'}}</label>
+                                    </div>
+                                    <div *ngIf="payment.amount">
+                                        <label class="payment-label">Suma:</label>
+                                        <label>{{payment.amount}} Bs.</label>
+                                    </div>
+                                </div>                                
+                            </div>                            
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td *ngFor="let monthTotal of paymentYear.monthTotals">
+                            {{monthTotal}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr />
+        </div>
+    </div>
+</div>
